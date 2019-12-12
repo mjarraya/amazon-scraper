@@ -7,7 +7,7 @@ const app = express();
 app.get("/", async (req, res) => {
   const { query } = req.query;
   const searchUrl = `https://www.amazon.com/s?k=${query}`;
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   const page = await browser.newPage();
 
   await page.goto(searchUrl);
