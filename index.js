@@ -46,7 +46,7 @@ app.get("/", async (req, res) => {
           const image = item.querySelector("img").getAttribute("src");
 
           return {
-            title: title.slice(0, 30) + title.length > 30 ? "..." : '',
+            title,
             product_id: url,
             stars,
             num_reviews,
