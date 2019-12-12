@@ -36,7 +36,7 @@ app.get("/", async (req, res) => {
           let stars, num_reviews;
           if (temp) {
             stars = parseFloat(temp[0].getAttribute("aria-label"));
-            num_reviews = temp[1].getAttribute("aria-label");
+            num_reviews = parseInt(temp[1].getAttribute("aria-label"), 10);
           }
 
           const price =
@@ -46,7 +46,7 @@ app.get("/", async (req, res) => {
           const image = item.querySelector("img").getAttribute("src");
 
           return {
-            title,
+            title: title.slice(0, 30) + title.length > 30 ? "..." : '',
             product_id: url,
             stars,
             num_reviews,
@@ -57,6 +57,7 @@ app.get("/", async (req, res) => {
         .filter(Boolean);
     });
 
+    browser.close();
     res.json(data);
   } catch (err) {
     res.json(err);
