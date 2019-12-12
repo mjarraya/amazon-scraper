@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const puppeteer = require("puppeteer");
 
@@ -7,7 +7,7 @@ const app = express();
 app.get("/", async (req, res) => {
   const { query } = req.query;
   const searchUrl = `https://www.amazon.com/s?k=${query}`;
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
 
   await page.goto(searchUrl);
@@ -39,9 +39,11 @@ app.get("/", async (req, res) => {
             num_reviews = parseInt(temp[1].getAttribute("aria-label"), 10);
           }
 
-          const price =
+          const rawPrice =
             item.querySelector(".a-price") &&
             item.querySelector(".a-price>.a-offscreen").innerText;
+
+          const price = parseFloat(rawPrice.slice(1));
 
           const image = item.querySelector("img").getAttribute("src");
 
