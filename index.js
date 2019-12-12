@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const puppeteer = require("puppeteer");
 
@@ -62,7 +63,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.listen(5555);
+app.listen(process.env.PORT);
 
 // newObj.title = el.title;
 // newObj.image = el.image;
