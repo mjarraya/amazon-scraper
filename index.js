@@ -64,10 +64,3 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(process.env.PORT);
-
-// newObj.title = el.title;
-// newObj.image = el.image;
-// newObj.price = el.price;
-// newObj.num_reviews = el.num_reviews;
-// newObj.stars = el.stars;
-// newObj.product_id = el.product_id;
