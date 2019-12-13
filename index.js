@@ -41,9 +41,9 @@ app.get("/", async (req, res) => {
 
           const rawPrice =
             item.querySelector(".a-price") &&
-            item.querySelector(".a-price>.a-offscreen").innerText;
+            item.querySelector(".a-price>.a-offscreen").innerText
 
-          const price = parseFloat(rawPrice.slice(1));
+          const price = rawPrice ?  parseFloat(rawPrice.slice(1)) : 0;
 
           const image = item.querySelector("img").getAttribute("src");
 
