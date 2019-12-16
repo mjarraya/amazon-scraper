@@ -10,11 +10,6 @@ app.get("/", async (req, res) => {
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
 
-  page.on("console", msg => {
-    for (let i = 0; i < msg.args.length; ++i)
-      console.log(`${i}: ${msg.args[i]}`);
-  });
-
   await page.goto(searchUrl);
   try {
     const data = await page.evaluate(() => {
@@ -23,23 +18,6 @@ app.get("/", async (req, res) => {
           ".s-result-list.s-search-results.sg-row>div"
         )
       ];
-
-      console.log(
-        "-----------------------------------------------------------"
-      );
-      console.log(
-        "-----------------------------------------------------------"
-      );
-      console.log(
-        "-----------------------------------------------------------"
-      );
-      console.log(
-        "-----------------------------------------------------------"
-      );
-      console.log(
-        "-----------------------------------------------------------"
-      );
-      console.log("ITEMS (l.42): ", items.length);
 
       return items
         .map(item => {
