@@ -10,6 +10,11 @@ app.get("/", async (req, res) => {
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
 
+  page.on("console", msg => {
+    for (let i = 0; i < msg.args.length; ++i)
+      console.log(`${i}: ${msg.args[i]}`);
+  });
+
   await page.goto(searchUrl);
   try {
     const data = await page.evaluate(() => {
@@ -18,6 +23,24 @@ app.get("/", async (req, res) => {
           ".s-result-list.s-search-results.sg-row>div"
         )
       ];
+
+      console.log(
+        "-----------------------------------------------------------"
+      );
+      console.log(
+        "-----------------------------------------------------------"
+      );
+      console.log(
+        "-----------------------------------------------------------"
+      );
+      console.log(
+        "-----------------------------------------------------------"
+      );
+      console.log(
+        "-----------------------------------------------------------"
+      );
+      console.log("ITEMS (l.42): ", items.length);
+
       return items
         .map(item => {
           if (!item.querySelector(".a-color-base.a-text-normal")) {
@@ -41,9 +64,9 @@ app.get("/", async (req, res) => {
 
           const rawPrice =
             item.querySelector(".a-price") &&
-            item.querySelector(".a-price>.a-offscreen").innerText
+            item.querySelector(".a-price>.a-offscreen").innerText;
 
-          const price = rawPrice ?  parseFloat(rawPrice.slice(1)) : 0;
+          const price = rawPrice ? parseFloat(rawPrice.slice(1)) : 0;
 
           const image = item.querySelector("img").getAttribute("src");
 
